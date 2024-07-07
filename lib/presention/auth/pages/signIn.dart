@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify_app/common/widgets/app_bar/app_bar.dart';
@@ -94,6 +93,7 @@ class SignIn extends StatelessWidget {
     return TextField(
       controller: _Passwordd,
       decoration: const InputDecoration(
+
         hintText: 'Password',
 
       ).applyDefaults( Theme.of(context).inputDecorationTheme),

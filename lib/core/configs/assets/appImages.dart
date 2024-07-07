@@ -5,5 +5,7 @@ class AppImages{
   static const String ChooseMode='${basePath}choose_mode_bg.png';
 
   static const String auth='${basePath}auth_bg.png';
+  static const String homeTop='${basePath}home_artist.png';
+
 
 }

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spotify_app/data/models/auth/create_user_req.dart';
 import 'package:dartz/dartz.dart';
 import 'package:spotify_app/data/models/auth/signInUserRE.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 abstract class AuthFireBase{
   Future<Either>SignIn(SignInUserReQ signInUserReQ);
   Future<Either>SignUp(CreateUserReq createUserReq);
@@ -16,6 +16,8 @@ class AuthFireBaseImplemention extends AuthFireBase{
         email: signInUserReQ.email,
         password: signInUserReQ.password,
       );
+
+
       return Right('SignIn was successful');
     } on FirebaseAuthException catch (e) {
       String message = '';
@@ -35,11 +37,18 @@ class AuthFireBaseImplemention extends AuthFireBase{
   @override
   Future<Either> SignUp(CreateUserReq createUserReq) async{
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      var data=await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: createUserReq.email,
         password: createUserReq.password,
       );
+      FirebaseFirestore.instance.collection('Users').add(
+          {
+            'name':createUserReq.fullName,
+            'email':data.user?.email
+          }
+      );
       return Right('Signup was successful');
+
     } on FirebaseAuthException catch (e) {
       String message = '';
       if (e.code == 'weak-password') {
