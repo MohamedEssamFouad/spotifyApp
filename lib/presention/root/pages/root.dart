@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spotify_app/core/configs/assets/appImages.dart';
 import 'package:spotify_app/core/configs/assets/appVector.dart';
 import 'package:spotify_app/core/themes/appColor.dart';
+import 'package:spotify_app/presention/root/widgets/news_songs.dart';
 
 class root extends StatefulWidget {
   const root({super.key});
@@ -45,6 +46,20 @@ class _rootState extends State<root>with SingleTickerProviderStateMixin {
             _homeTopCard(),
 
             _tabs(),
+            SizedBox(
+              height:260.h ,
+              child: TabBarView(children:
+              [
+                NewsSongs(),
+                Container(),
+                Container(),
+                Container(),
+              ],
+                controller: _tabController,
+
+
+              ),
+            ),
           ],
         ),
       ),
